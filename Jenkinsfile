@@ -1,15 +1,33 @@
 pipeline {
   agent any
   stages {
+    stage('Source') {
+      steps {
+        sh 'echo "source the code from github"'
+      }
+    }
     stage('Build') {
       steps {
-        sh '''echo "get code from github"
-echo "build artifact"'''
+        sh 'echo "build the artifact"'
+      }
+    }
+    stage('Test') {
+      parallel {
+        stage('Test') {
+          steps {
+            sh 'echo "testing"'
+          }
+        }
+        stage('test services') {
+          steps {
+            sh 'echo "test services"'
+          }
+        }
       }
     }
     stage('Deploy') {
       steps {
-        sh 'echo "deploy to production"'
+        sh 'echo "deploy to QA"'
       }
     }
   }
