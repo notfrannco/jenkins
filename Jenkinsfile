@@ -3,31 +3,17 @@ pipeline {
   stages {
     stage('Source') {
       steps {
-        sh 'echo "source the code from github"'
+        sh 'echo "Develop"'
       }
     }
     stage('Build') {
       steps {
-        sh 'echo "build the artifact"'
-      }
-    }
-    stage('Test') {
-      parallel {
-        stage('Test') {
-          steps {
-            sh 'echo "testing"'
-          }
-        }
-        stage('test services') {
-          steps {
-            sh 'echo "test services"'
-          }
-        }
+        sh 'echo "build the artifact Develop"'
       }
     }
     stage('Deploy') {
       steps {
-        sh 'echo "deploy to QA"'
+        sh 'echo "deploy to Develop"'
       }
     }
   }
