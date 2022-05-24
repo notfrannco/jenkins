@@ -25,7 +25,7 @@ mvn -Dmaven.test.failure.ignore clean package'''
       }
       steps {
         unstash 'build-test-artifacts'
-        archiveArtifacts(artifacts: '**target/*.jar', onlyIfSuccessful: true)
+        archiveArtifacts(artifacts: 'target/*.jar', onlyIfSuccessful: true)
       }
     }
 
