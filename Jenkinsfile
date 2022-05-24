@@ -3,7 +3,7 @@ pipeline {
   stages {
     stage('Source') {
       steps {
-        sh 'echo "source the code from github"'
+        sh 'echo "source the code from github for brach test"'
       }
     }
     stage('Build') {
