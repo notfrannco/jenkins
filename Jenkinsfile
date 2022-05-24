@@ -10,7 +10,6 @@ pipeline {
       }
       steps {
         sh '''git clone https://github.com/begining-jenkins-blue-ocean/example-maven-project.git
-cd example-maven-project/
 mvn -Dmaven.test.failure.ignore clean package'''
         stash(name: 'build-test-artifacts', includes: '**/target/surefire-reports/TEST-*.xml,target/*.jar')
       }
