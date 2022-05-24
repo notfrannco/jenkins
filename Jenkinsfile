@@ -1,34 +1,32 @@
 pipeline {
-  agent any
+  agent none
   stages {
-    stage('Source') {
-      steps {
-        sh 'echo "source the code from github for brach test"'
-      }
-    }
-    stage('Build') {
-      steps {
-        sh 'echo "build the artifact"'
-      }
-    }
-    stage('Test') {
-      parallel {
-        stage('Test') {
-          steps {
-            sh 'echo "testing"'
-          }
+    stage('Build & Test') {
+      agent {
+        node {
+          label 'docker'
         }
-        stage('test services') {
-          steps {
-            sh 'echo "test services"'
-          }
-        }
+
       }
-    }
-    stage('Deploy') {
       steps {
-        sh 'echo "deploy to QA"'
+        sh 'mvn -Dmaven.test.failure.ignore clean package'
+        stash(name: 'build-test-artifacts', includes: '**/target/surefire-reports/TEST-*.xml,target/*.jar')
       }
     }
+
+    stage('Report & Publish') {
+      agent {
+        node {
+          label 'docker'
+        }
+
+      }
+      steps {
+        unstash 'build-test-artifacts'
+        junit '**/target/surefire-reports/TEST-*.xml'
+        archiveArtifacts(artifacts: 'target/*.jar', onlyIfSuccessful: true)
+      }
+    }
+
   }
 }
