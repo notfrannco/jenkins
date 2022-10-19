@@ -9,8 +9,10 @@ pipeline {
 
       }
       steps {
+        sh 'git clone https://github.com/nikhilpathania/hello-world-example.git'
+        sh 'cd hello-world-example/'
         sh 'mvn -Dmaven.test.failure.ignore clean package'
-        stash(name: 'build-test-artifacts', includes: '**/target/surefire-reports/TEST-*.xml,target/*.war')
+        stash(name: 'build-test-artifacts', includes: '**/target/surefire-reports/TEST-*.xml,target/helloworld-example-0.1.0.jar')
       }
     }
 
