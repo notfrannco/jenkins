@@ -12,7 +12,7 @@ pipeline {
         sh 'git clone https://github.com/nikhilpathania/hello-world-example.git'
         sh 'cd hello-world-example/'
         sh 'cd hello-world-example/; mvn -Dmaven.test.failure.ignore clean package'
-        stash(name: 'build-test-artifacts', includes: '**/target/surefire-reports/TEST-*.xml,target/helloworld-example-0.1.0.jar')
+        stash(name: 'build-test-artifacts', includes: '**/target/surefire-reports/TEST-*.xml,**/target/helloworld-example-0.1.0.jar')
       }
     }
 
