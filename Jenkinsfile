@@ -26,7 +26,7 @@ pipeline {
       steps {
         unstash 'build-test-artifacts'
         junit '**/target/surefire-reports/TEST-*.xml'
-        archiveArtifacts(artifacts: '*.jar', onlyIfSuccessful: true)
+        archiveArtifacts(artifacts: '**/target/surefire-reports/TEST-*.xml,**/target/helloworld-example-0.1.0.jar', onlyIfSuccessful: true)
       }
     }
 
