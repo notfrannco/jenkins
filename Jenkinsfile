@@ -3,8 +3,8 @@ pipeline {
   stages {
     stage('Build & Test') {
       agent {
-        node {
-          label 'docker'
+        docker {
+          image 'nikhilpathania/jenkins_ssh_agent'
         }
 
       }
@@ -18,8 +18,8 @@ pipeline {
 
     stage('Report & Publish') {
       agent {
-        node {
-          label 'docker'
+        docker {
+          image 'nikhilpathania/jenkins_ssh_agent'
         }
 
       }
